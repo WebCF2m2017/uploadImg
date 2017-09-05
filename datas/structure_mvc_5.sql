@@ -39,7 +39,7 @@ CREATE UNIQUE INDEX `url_UNIQUE` ON `mvc_5`.`images` (`nom` ASC);
 DROP TABLE IF EXISTS `mvc_5`.`categ` ;
 
 CREATE TABLE IF NOT EXISTS `mvc_5`.`categ` (
-  `idcateg` INT NOT NULL,
+  `idcateg` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `intitule` VARCHAR(45) NULL,
   PRIMARY KEY (`idcateg`))
 ENGINE = InnoDB;
@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS `mvc_5`.`images_has_categ` ;
 
 CREATE TABLE IF NOT EXISTS `mvc_5`.`images_has_categ` (
   `images_idimages` INT UNSIGNED NOT NULL,
-  `categ_idcateg` INT NOT NULL,
+  `categ_idcateg` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`images_idimages`, `categ_idcateg`),
   CONSTRAINT `fk_images_has_categ_images`
     FOREIGN KEY (`images_idimages`)
