@@ -1,0 +1,13 @@
+{
+    "name": "webform/10-upload-img",
+    "type": "library",
+    "require": {
+        "twig/twig": "2.4.*"
+    },
+    "authors": [
+        {
+            "name": "michaeljpitz",
+            "email": "michaeljpitz@gmail.com"
+        }
+    ]
+}
