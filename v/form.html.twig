@@ -1,0 +1,18 @@
+{% extends "base.html.twig"%}
+{% block title %}Formulaire{% endblock %}
+            {% block head %}
+                <h2>Notre formulaire</h2>
+            {% endblock %}
+            {% block content %}
+                <hr/>
+                <form enctype="multipart/form-data" action="" method="post">
+  <input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
+  <input type="text" name="titre" placeholder="Titre" required /><br/>
+  <textarea name="desc" required placeholder="Description"></textarea><br/>
+  Envoyez ce fichier : <input name="limage" type="file"  required /><br/><br/>
+  <input type="submit" value="Envoyer le fichier" />
+</form>
+            {% endblock %}
+            {% block footer %}
+                <hr/><p>Pied de page</p>
+            {% endblock %}
