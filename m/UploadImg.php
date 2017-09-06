@@ -10,7 +10,7 @@ class UploadImg {
     // Attributs
     private  $extensions = [".jpg",".jpeg", ".gif", ".png"];
     private  $chemin = "v/upload/";
-    private  $nouveauNomFichier;
+    public  $nouveauNomFichier;
     private  $taille;
     private  $extFichier;
 
@@ -28,15 +28,15 @@ class UploadImg {
                 // si le fichier n'est pas trog grand 
                 if ($this->VerifTaille($fichier['size'])) {
                     // création du nouveau nom de fichier
-                    $this->$nouveauNomFichier = $this->NouveauNom();
+                    $this->nouveauNomFichier = $this->NouveauNom();
                     // on essaye d'envoyer physiquement le fichier
-                    if(move_uploaded_file($fichier['tmp_name'], $this->$chemin."original/".$this->$nouveauNomFichier)){
-                        return true;
+                    if(move_uploaded_file($fichier['tmp_name'], $this->chemin."original/".$this->nouveauNomFichier)){
+                        return [$this->nouveauNomFichier];
                     }else{
                         echo "Erreur inconnue lors du transfert";
                     }
                 } else {
-                    echo "fichier trop lourd! " . $this->$taille . " sur " . $this->TAILLEMAX . " autorisée!";
+                    echo "fichier trop lourd! " . $this->taille . " sur " . $this->TAILLEMAX . " autorisée!";
                 }
             } else {
                 echo "extension non valide";
@@ -50,9 +50,9 @@ class UploadImg {
         $string = strrchr($nomOrigine, "."); // on récupère l'extension avec le dernier .
         $ext = strtolower($string); // on met la chaine en minuscule
         // si l'extension est dans le tableau
-        if (in_array($ext, $this->$extensions)) {
+        if (in_array($ext, $this->extensions)) {
             // on remplit l'attribut
-            $this->$extFichier = $ext;
+            $this->extFichier = $ext;
             return true;
         } else {
             return false;
@@ -60,8 +60,8 @@ class UploadImg {
     }
 
     private  function VerifTaille($taille) {
-        $this->$taille = $taille;
-        if($taille>$this->TAILLEMAX){
+        $this->taille = $taille;
+        if($taille>self::TAILLEMAX){
             return false;
         }else{
             return true;
@@ -70,11 +70,11 @@ class UploadImg {
     private  function NouveauNom() {
         $sortie = date("YmdHis"); // format datetime sans séparateur
         $hasard = mt_rand(10000, 99999);
-        return $sortie."_".$hasard.$this->$extFichier;
+        return $sortie."_".$hasard.$this->extFichier;
     }
     public  function AfficheDossier() {
         // doit renvoyer tout ce qu'il y a dans le dossier
-        $fichiers = scandir($this->$chemin);
+        $fichiers = scandir($this->chemin);
         // on ne prend que les valeurs non communes des 2 tableaux (pour supprimer . et ..)
         $fichier = array_diff($fichiers, [".",".."]);
         return $fichier;
