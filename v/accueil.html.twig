@@ -1,0 +1,20 @@
+{% extends "base.html.twig"%}
+{% block title %}Accueil{% endblock %}
+            {% block head %}
+                <h2>Affichage de toutes les images</h2>
+            {% endblock %}
+            {% block menu %}
+                <ul>
+                    <li><a href='./'>Retour à l'accueil</a></li>
+                    <li><a href='?upload'>Envoyer une image</a></li>
+                </ul>
+            {% endblock %}
+            {% block content %}
+                <hr/>
+                {% for obj in imgt %}
+                    <a href='v/upload/resize/{{obj.nom}}' class='nosPhotos'><img src='v/upload/thumbs/{{obj.nom}}' alt='{{obj.nom}}' /></a>
+                {% endfor %}    
+            {% endblock %}
+            {% block footer %}
+                <hr/><p>Pied de page</p>
+            {% endblock %}

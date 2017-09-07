@@ -1,0 +1,44 @@
+{
+    "name": "kraksoft/colorbox",
+    "description": "A light-weight, customizable lightbox plugin for jQuery",
+    "keywords": [
+        "modal",
+        "lightbox",
+        "window",
+        "popup",
+        "ui",
+        "jQuery"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jack Moore",
+            "email": "hello@jacklmoore.com"
+        }
+    ],
+    "homepage": "http://www.jacklmoore.com/colorbox",
+    "type": "component",
+    "require": {
+        "robloach/component-installer": "0.0.*"
+    },
+    "extra": {
+        "component": {
+            "name": "colorbox",
+            "files": [
+                "example1/colorbox.css",
+                "example2/colorbox.css",
+                "example3/colorbox.css",
+                "example4/colorbox.css",
+                "example5/colorbox.css",
+                "example1/images/*",
+                "example2/images/*",
+                "example3/images/*",
+                "example4/images/*",
+                "example5/images/*",
+                "i18n/*",
+                "jquery.colorbox.js",
+                "jquery.colorbox-min.js"
+            ]
+        }
+    }
+}

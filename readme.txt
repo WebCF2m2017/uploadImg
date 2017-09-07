@@ -5,3 +5,5 @@
 3) Il faut un lien vers une page d'ajout d'image.
 
 4) Sur cette page il faut un formulaire avec le titre, la description, la sélection d'une image sur l'ordinateur et le choix des catégories.
+
+5) 
