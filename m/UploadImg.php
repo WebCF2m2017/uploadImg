@@ -10,7 +10,7 @@ class UploadImg {
     // Attributs
     private  $extensions = [".jpg",".jpeg", ".gif", ".png"];
     private  $chemin = "v/upload/";
-    public  $nouveauNomFichier;
+    public   $nouveauNomFichier;
     private  $taille;
     private  $extFichier;
 
@@ -36,7 +36,7 @@ class UploadImg {
                         echo "Erreur inconnue lors du transfert";
                     }
                 } else {
-                    echo "fichier trop lourd! " . $this->taille . " sur " . $this->TAILLEMAX . " autorisée!";
+                    echo "fichier trop lourd! " . $this->taille . " sur " . self::TAILLEMAX . " autorisée!";
                 }
             } else {
                 echo "extension non valide";
@@ -72,12 +72,6 @@ class UploadImg {
         $hasard = mt_rand(10000, 99999);
         return $sortie."_".$hasard.$this->extFichier;
     }
-    public  function AfficheDossier() {
-        // doit renvoyer tout ce qu'il y a dans le dossier
-        $fichiers = scandir($this->chemin);
-        // on ne prend que les valeurs non communes des 2 tableaux (pour supprimer . et ..)
-        $fichier = array_diff($fichiers, [".",".."]);
-        return $fichier;
-    }
+
 
 }
