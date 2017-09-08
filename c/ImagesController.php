@@ -22,7 +22,7 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
     // création d'une instance de UploadImg
     $upImg= new UploadImg($_FILES['limage']);
     // création du fichier dans /resize (redimention avec proportions gardées) L/H/ qualité jpg
-    $upImg->makeResize($imgInfo[0],$imgInfo[1],800,600,80);
+    $upImg->makeResize($imgInfo[0],$imgInfo[1],800,600,90);
     // modification de la variable POST nom avec le nouveau nom de fichier (nouveauNomFichier) venant de UploadImg (public)
     $_POST['nom']=$upImg->nouveauNomFichier;
     // création de l'image pour l'insertion dans la db
@@ -30,7 +30,7 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
     // insertion dans la db
     $obj = $manImages->InsertImg($objImg);
     if($obj){
-        //header("Location: ./");
+        header("Location: ./");
     }else{
         echo "<h1>Erreur lors de l'insertion</h1>";
     }

@@ -74,9 +74,53 @@ class UploadImg {
     }
     
     public function makeResize($largeurOri,$hauteurOri,$largeurMax,$hauteurMax,$qualityJpg){
-        // pour obtenir le ratio (proportion)
-        $proportion = $largeurOri/$hauteurOri;
-        //$this->chemin."original/".$this->nouveauNomFichier
+        
+        // si la largeur d'origine est plus petite que la largeur maximum et idem hauteur origine/hauteur maximum
+        if($largeurOri<$largeurMax && $hauteurOri<$hauteurMax){
+            $largeurFinal = $largeurOri;
+            $hauteurFinal = $hauteurOri;
+        }else{
+            // si l'image est en paysage
+            if($largeurOri>$hauteurOri){
+                // pour obtenir le ratio (proportion)
+                $proportion = $largeurMax/$largeurOri;                             
+            // l'image est en mode portrait ou un carré    
+            }else{
+                // pour obtenir le ratio (proportion)
+                $proportion = $hauteurMax/$hauteurOri;           
+            }
+            // mise en proportion de la largeur et hauteur finales
+            $largeurFinal = round($largeurOri*$proportion);
+            $hauteurFinal = round($hauteurOri*$proportion);
+        }
+        //var_dump($largeurFinal,$hauteurFinal);
+        // création du fichier vierge aux tailles finales
+        $newImg = imagecreatetruecolor($largeurFinal, $hauteurFinal);
+        
+        // on va copier l'image originale suivant son extension
+        if($this->extFichier == ".jpg"||$this->extFichier == ".jpeg"){
+            // en jpg
+            $copie = imagecreatefromjpeg($this->chemin."original/".$this->nouveauNomFichier);
+            // on adapte l'image au bon format, puis on colle
+            imagecopyresampled($newImg, $copie, 0, 0, 0, 0, $largeurFinal, $hauteurFinal, $largeurOri, $hauteurOri);
+            // on finalise le fichier jpg
+            imagejpeg($newImg, $this->chemin."resize/".$this->nouveauNomFichier, $qualityJpg);
+        }elseif($this->extFichier == ".png"){
+            // en png
+            $copie = imagecreatefrompng($this->chemin."original/".$this->nouveauNomFichier);
+            // on adapte l'image au bon format, puis on colle
+            imagecopyresampled($newImg, $copie, 0, 0, 0, 0, $largeurFinal, $hauteurFinal, $largeurOri, $hauteurOri);
+            // on finalise le fichier png
+            imagepng($newImg, $this->chemin."resize/".$this->nouveauNomFichier);
+        }else{
+            // en gif
+            $copie = imagecreatefromgif($this->chemin."original/".$this->nouveauNomFichier);
+             // on adapte l'image au bon format, puis on colle
+            imagecopyresampled($newImg, $copie, 0, 0, 0, 0, $largeurFinal, $hauteurFinal, $largeurOri, $hauteurOri);
+            // on finalise le fichier png
+            imagegif($newImg, $this->chemin."resize/".$this->nouveauNomFichier);
+        }
+        
     }
 
 }
