@@ -72,6 +72,11 @@ class UploadImg {
         $hasard = mt_rand(10000, 99999);
         return $sortie."_".$hasard.$this->extFichier;
     }
-
+    
+    public function makeResize($largeurOri,$hauteurOri,$largeurMax,$hauteurMax,$qualityJpg){
+        // pour obtenir le ratio (proportion)
+        $proportion = $largeurOri/$hauteurOri;
+        //$this->chemin."original/".$this->nouveauNomFichier
+    }
 
 }
