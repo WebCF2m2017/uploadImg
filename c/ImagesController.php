@@ -23,6 +23,8 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
     $upImg= new UploadImg($_FILES['limage']);
     // création du fichier dans /resize (redimention avec proportions gardées) L/H/ qualité jpg
     $upImg->makeResize($imgInfo[0],$imgInfo[1],800,600,90);
+    // création du fichier dans /thumbs (redimention avec crop en carré de 150 sur 150 px) + qualité jpg
+    $upImg->makeThumbs($imgInfo[0],$imgInfo[1],150,60);
     // modification de la variable POST nom avec le nouveau nom de fichier (nouveauNomFichier) venant de UploadImg (public)
     $_POST['nom']=$upImg->nouveauNomFichier;
     // création de l'image pour l'insertion dans la db
