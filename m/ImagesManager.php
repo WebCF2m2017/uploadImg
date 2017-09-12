@@ -22,7 +22,10 @@ class ImagesManager {
         // ici soucis
         $sql = "SELECT i.* FROM images i 
                 INNER JOIN images_has_categ h
-                    ON h.categ_idcateg=?";
+                    ON h.images_idimages=idimages
+                INNER JOIN categ c
+                    ON h.categ_idcateg = c.idcateg
+                WHERE c.idcateg=? ;";
         
         $req = $this->db->prepare($sql);
         $req->bindValue(1, $id, PDO::PARAM_INT);
