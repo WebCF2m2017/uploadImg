@@ -18,6 +18,18 @@ class ImagesManager {
         $req = $this->db->query($sql);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    private function ImgJointureCateg(int $id, array $categ) {
+        //var_dump($id, $categ);
+        $sql="INSERT INTO images_has_categ (images_idimages,categ_idcateg) VALUES (?,?)";
+        $prep = $this->db->prepare($sql);
+        $prep->bindParam(1, $id, PDO::PARAM_INT);
+        foreach($categ as $valeur){
+            $prep->bindParam(2,$valeur, PDO::PARAM_INT);
+            $prep->execute();
+            }
+        }
+    
     public function InsertImg(Images $img){
 
         $sql = "INSERT INTO images (titre,`desc`,nom,largeOrigine,hautOrigine) VALUES (?,?,?,?,?);";
@@ -28,7 +40,12 @@ class ImagesManager {
         $req->bindValue(4, $img->getLargeOrigine(),PDO::PARAM_INT);
         $req->bindValue(5, $img->getHautOrigine(),PDO::PARAM_INT);
         try{
+            // exécution
             $req->execute();
+            // récupération de l'id de k'image
+            $id = $this->db->lastInsertId();
+            // pour insérer dans le tableau de jointure
+            $this->ImgJointureCateg($id,$img->getCateg_idcateg());
         } catch (PDOException $e){
             echo $e->getMessage();
         }

@@ -7,12 +7,16 @@
  */
 class Images {
     // Attributs
+    //mapping table images
     private $idimages;
     private $titre;
     private $desc;
     private $nom;
     private $largeOrigine;
     private $hautOrigine;
+    
+    // attribut de jointure avec categ pour $recup_menu
+    private $categ_idcateg;
     
     // Constantes
     // méthodes
@@ -76,6 +80,14 @@ class Images {
     public function setHautOrigine($hautOrigine) {
         $this->hautOrigine = $hautOrigine;
     }
+    public function getCateg_idcateg() {
+        return $this->categ_idcateg;
+    }
+
+    public function setCateg_idcateg($categ_idcateg) {
+        $this->categ_idcateg = $categ_idcateg;
+    }
+
 
 
 }

@@ -18,4 +18,14 @@ class CategManager {
         $req = $this->db->query("SELECT * FROM categ ORDER BY intitule ASC;");
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function afficheUne($id) {
+        $sql = "SELECT * FROM categ WHERE idcateg = ? ;";
+        $req = $this->db->prepare($sql);
+        $req->execute();
+        if($req->rowCount()){
+            return $req->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return false;
+        }
+    }
 }

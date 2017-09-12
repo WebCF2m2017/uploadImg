@@ -4,7 +4,11 @@
                 <h2>Notre formulaire</h2>
             {% endblock %}
             {% block menu %}
-                <ul><li><a href='./'>Retour à l'accueil</a></li></ul>
+                <ul><li><a href='./'>Retour à l'accueil</a></li>
+                {% for m in menu %}
+                        <li><a href='?idcateg={{m.idcateg}}'>{{m.intitule}}</a></li>
+                    {% endfor %}
+                </ul>
             {% endblock %}
             {% block content %}
                 <hr/>
@@ -13,6 +17,11 @@
   <input type="text" name="titre" placeholder="Titre" required /><br/>
   <textarea name="desc" required placeholder="Description"></textarea><br/>
   Envoyez ce fichier : <input name="limage" type="file"  required /><br/><br/>
+  Choix des catgégories : 
+  {% for c in menu %}
+  {{c.intitule}} <input name="categ_idcateg[]" type="checkbox" value="{{c.idcateg}}" /> | 
+  {% endfor %}
+  <br/><br/>
   <input type="submit" value="Envoyer le fichier" />
 </form>
             {% endblock %}

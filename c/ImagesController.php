@@ -46,10 +46,14 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
     
     //var_dump($_POST, $_FILES['limage'],$objImg,$upImh);
 } elseif(isset($_GET['upload'])) {
-    echo $twig->render("form.html.twig");
+    echo $twig->render("form.html.twig",["menu"=>$recup_menu]);
+// si on a cliqué sur une section    
+}elseif(isset($_GET['idcateg'])&& ctype_digit($_GET['idcateg'])) {
+    $ToutesImg = $manImages->AfficheTous();
+    echo $twig->render("categ.html.twig",["imgt"=>$ToutesImg,"menu"=>$recup_menu]);
 } else {
     // var_dump(ImagesManager::AfficheDossier("./m/"));
     $ToutesImg = $manImages->AfficheTous();
     //var_dump($ToutesImg);
-    echo $twig->render("accueil.html.twig",["imgt"=>$ToutesImg]);
+    echo $twig->render("accueil.html.twig",["imgt"=>$ToutesImg,"menu"=>$recup_menu]);
 }
