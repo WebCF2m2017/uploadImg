@@ -4,9 +4,16 @@
 require_once 'm/UploadImg.php';
 require_once 'm/Images.php';
 require_once 'm/ImagesManager.php';
+require_once 'm/Categ.php';
+require_once 'm/CategManager.php';
 
 // création des manager's
 $manImages = new ImagesManager($connect);
+$manCateg = new CategManager($connect);
+
+// on récupère les rubriques pour le menu
+$recup_menu = $manCateg->afficheToutes();
+//var_dump($recup_menu);
 
 // si on a envoyé le formulaire ET qu'on a un fichier uploadé
 if (!empty($_POST) && !empty($_FILES['limage'])) {
