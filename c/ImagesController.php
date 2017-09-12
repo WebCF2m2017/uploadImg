@@ -49,8 +49,11 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
     echo $twig->render("form.html.twig",["menu"=>$recup_menu]);
 // si on a cliqué sur une section    
 }elseif(isset($_GET['idcateg'])&& ctype_digit($_GET['idcateg'])) {
+    // on récupère les images de la catégorie
     $ToutesImg = $manImages->AfficheParCateg($_GET['idcateg']);
-    echo $twig->render("categ.html.twig",["imgt"=>$ToutesImg,"menu"=>$recup_menu]);
+    // info categ
+    $infoCateg = $manCateg->afficheUne($_GET['idcateg']);
+    echo $twig->render("categ.html.twig",["infos"=>$infoCateg,"imgt"=>$ToutesImg,"menu"=>$recup_menu]);
 } else {
     // var_dump(ImagesManager::AfficheDossier("./m/"));
     $ToutesImg = $manImages->AfficheTous();

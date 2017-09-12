@@ -21,6 +21,7 @@ class CategManager {
     public function afficheUne($id) {
         $sql = "SELECT * FROM categ WHERE idcateg = ? ;";
         $req = $this->db->prepare($sql);
+        $req->bindValue(1,$id, PDO::PARAM_INT);
         $req->execute();
         if($req->rowCount()){
             return $req->fetch(PDO::FETCH_ASSOC);
