@@ -18,6 +18,21 @@ class ImagesManager {
         $req = $this->db->query($sql);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function AfficheParCateg($id){
+        // ici soucis
+        $sql = "SELECT i.* FROM images i 
+                INNER JOIN images_has_categ h
+                    ON h.categ_idcateg=?";
+        
+        $req = $this->db->prepare($sql);
+        $req->bindValue(1, $id, PDO::PARAM_INT);
+        $req->execute();
+        if($req->rowCount()){
+            return $req->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return false;
+        }
+    }
     
     private function ImgJointureCateg(int $id, array $categ) {
         //var_dump($id, $categ);
