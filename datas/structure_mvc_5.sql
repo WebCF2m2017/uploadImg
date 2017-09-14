@@ -16,6 +16,49 @@ CREATE SCHEMA IF NOT EXISTS `mvc_5` DEFAULT CHARACTER SET utf8 ;
 USE `mvc_5` ;
 
 -- -----------------------------------------------------
+-- Table `mvc_5`.`droits`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mvc_5`.`droits` ;
+
+CREATE TABLE IF NOT EXISTS `mvc_5`.`droits` (
+  `iddroits` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `leDroit` VARCHAR(45) NULL,
+  `poster` TINYINT(1) NULL DEFAULT 1 COMMENT 'peut poster des images à son nom',
+  `supprimer` TINYINT(1) NULL DEFAULT 0 COMMENT 'peut supprimer ses images',
+  `modifier` TINYINT(1) NULL DEFAULT 1 COMMENT 'peut modifier ses images (titre et desc)',
+  `posterTous` TINYINT(1) NULL DEFAULT 0 COMMENT 'Peut poster au nom de n\'importe qui',
+  `modifierTous` TINYINT(1) NULL DEFAULT 0 COMMENT 'Peut modifier tous les images (titre et description)',
+  `supprimerTous` TINYINT(1) NULL DEFAULT 0 COMMENT 'Peut supprimer les images de tout le monde',
+  PRIMARY KEY (`iddroits`))
+ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `leDroit_UNIQUE` ON `mvc_5`.`droits` (`leDroit` ASC);
+
+
+-- -----------------------------------------------------
+-- Table `mvc_5`.`users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mvc_5`.`users` ;
+
+CREATE TABLE IF NOT EXISTS `mvc_5`.`users` (
+  `idusers` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(80) NULL,
+  `pwd` VARCHAR(128) NULL,
+  `droits_iddroits` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idusers`),
+  CONSTRAINT `fk_users_droits1`
+    FOREIGN KEY (`droits_iddroits`)
+    REFERENCES `mvc_5`.`droits` (`iddroits`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `login_UNIQUE` ON `mvc_5`.`users` (`login` ASC);
+
+CREATE INDEX `fk_users_droits1_idx` ON `mvc_5`.`users` (`droits_iddroits` ASC);
+
+
+-- -----------------------------------------------------
 -- Table `mvc_5`.`images`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mvc_5`.`images` ;
@@ -27,10 +70,18 @@ CREATE TABLE IF NOT EXISTS `mvc_5`.`images` (
   `nom` VARCHAR(50) NOT NULL,
   `largeOrigine` SMALLINT UNSIGNED NOT NULL,
   `hautOrigine` SMALLINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`idimages`))
+  `users_idusers` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idimages`),
+  CONSTRAINT `fk_images_users1`
+    FOREIGN KEY (`users_idusers`)
+    REFERENCES `mvc_5`.`users` (`idusers`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `url_UNIQUE` ON `mvc_5`.`images` (`nom` ASC);
+
+CREATE INDEX `fk_images_users1_idx` ON `mvc_5`.`images` (`users_idusers` ASC);
 
 
 -- -----------------------------------------------------
