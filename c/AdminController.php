@@ -14,6 +14,13 @@ require_once 'm/CategManager.php';
 require_once 'm/Users.php';
 require_once 'm/UsersManager.php';
 
+// création des manager's
+$manImages = new ImagesManager($connect);
+$manCateg = new CategManager($connect);
+
+// on récupère les rubriques pour le menu
+$recup_menu = $manCateg->afficheToutes();
+
 // si on a envoyé le formulaire ET qu'on a un fichier uploadé
 if (!empty($_POST) && !empty($_FILES['limage'])) {
     // rajout à la variable post du nom temporaire du fichier uplaodé

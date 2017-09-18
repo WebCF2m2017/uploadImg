@@ -35,4 +35,10 @@ if (isset($_POST['login']) && isset($_POST['pwd'])) {
     $util = new Users($_POST);
     //var_dump($util);
     $manageUtil = new UsersManager($connect);
+    $recupUtil = $manageUtil->ConnectUser($util);
+    if($recupUtil){
+        $_SESSION = $recupUtil;
+        $_SESSION['maclef']= session_id();
+        var_dump($_SESSION);
+    }
 }
