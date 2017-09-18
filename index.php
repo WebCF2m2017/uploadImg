@@ -26,5 +26,5 @@ $twig = new Twig_Environment($loader/*, array(
 )*/);
 
 // récupération du contrôleur
-require_once 'c/ImagesController.php';
+require_once 'c/PublicController.php';
 
