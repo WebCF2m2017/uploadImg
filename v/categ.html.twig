@@ -6,7 +6,6 @@
             {% block menu %}
                 <ul>
                     <li><a href='./'>Retour à l'accueil</a></li>
-                    <li><a href='?upload'>Envoyer une image</a></li>
                     {% for m in menu %}
                         <li><a href='?idcateg={{m.idcateg}}'>{{m.intitule}}</a></li>
                     {% endfor %}

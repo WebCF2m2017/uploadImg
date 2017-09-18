@@ -4,6 +4,9 @@
  * Contrôleur frontal
  */
 
+// start session
+session_start();
+
 // on essaye de se connecter
 try{
     $connect = new PDO('mysql:host=localhost;dbname=mvc_5', "root", "");
@@ -26,5 +29,15 @@ $twig = new Twig_Environment($loader/*, array(
 )*/);
 
 // récupération du contrôleur
-require_once 'c/PublicController.php';
+
+// connection or disconnect
+if(isset($_POST['login'])||isset($_GET['deco'])){
+    require_once "c/ConnectController.php";
+// Admin
+}elseif (isset($_SESSION['maclef'])){
+    require_once "c/AdminController.php";
+// Public
+}else {
+    require_once 'c/PublicController.php';
+}
 

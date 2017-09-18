@@ -17,6 +17,6 @@ Voir première partie finie sur https://github.com/mikhawa/uploadImg
 
 index.php redirige vers les 3 contrôleurs suivant les besoins:
 
-Donc: c/ImagesController.php => accueil et catégories hors connexion
+Donc: c/PublicController.php => accueil et catégories hors connexion
 donc: c/ConnectController.php => connexion et déconnexion
-donc: c/AdmintController.php => On est connecté, accueil et catégories + formulaire d'envoie
+donc: c/AdminController.php => On est connecté, accueil et catégories + formulaire d'envoi
