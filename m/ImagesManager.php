@@ -14,17 +14,23 @@ class ImagesManager {
         $this->db = $c;
     }
     public function AfficheTous(){
-        $sql = "SELECT * FROM images ORDER BY nom DESC";
+        $sql = "SELECT i.*, u.login FROM images i 
+                  INNER JOIN users u
+                  ON u.idusers = i.users_idusers
+                ORDER BY i.nom DESC";
+
         $req = $this->db->query($sql);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
     public function AfficheParCateg($id){
         // ici soucis
-        $sql = "SELECT i.* FROM images i 
+        $sql = "SELECT i.*, u.login FROM images i 
                 INNER JOIN images_has_categ h
                     ON h.images_idimages=idimages
                 INNER JOIN categ c
                     ON h.categ_idcateg = c.idcateg
+                INNER JOIN users u
+                  ON u.idusers = i.users_idusers
                 WHERE c.idcateg=? ;";
         
         $req = $this->db->prepare($sql);

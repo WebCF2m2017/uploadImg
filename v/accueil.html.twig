@@ -23,7 +23,7 @@
 
                 <hr/>
                 {% for obj in imgt %}
-                    <a title='{{obj.titre}}' href='v/upload/resize/{{obj.nom}}' class='nosPhotos'><img src='v/upload/thumbs/{{obj.nom}}' alt='{{obj.nom}}' /></a>
+                    <a title='{{obj.titre}} | © {{ obj.login }}' href='v/upload/resize/{{obj.nom}}' class='nosPhotos'><img src='v/upload/thumbs/{{obj.nom}}' alt='{{obj.nom}}' /></a>
                 {% endfor %}    
             {% endblock %}
             {% block footer %}
