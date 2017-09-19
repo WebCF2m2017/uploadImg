@@ -41,6 +41,7 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
     $upImg->makeThumbs($imgInfo[0], $imgInfo[1], 150, 60);
     // modification de la variable POST nom avec le nouveau nom de fichier (nouveauNomFichier) venant de UploadImg (public)
     $_POST['nom'] = $upImg->nouveauNomFichier;
+    $_POST['users_idusers']=$_SESSION['idusers'];
     // création de l'image pour l'insertion dans la db
     $objImg = new Images($_POST);
     // insertion dans la db

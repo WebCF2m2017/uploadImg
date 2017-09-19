@@ -14,6 +14,7 @@ class Images {
     private $nom;
     private $largeOrigine;
     private $hautOrigine;
+    private $users_idusers;
     
     // attribut de jointure avec categ pour $recup_menu
     private $categ_idcateg;
@@ -86,6 +87,22 @@ class Images {
 
     public function setCateg_idcateg($categ_idcateg) {
         $this->categ_idcateg = $categ_idcateg;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsers_idusers()
+    {
+        return $this->users_idusers;
+    }
+
+    /**
+     * @param mixed $users_idusers
+     */
+    public function setUsers_idusers($users_idusers)
+    {
+        $this->users_idusers = $users_idusers;
     }
 
 
