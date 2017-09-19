@@ -43,19 +43,19 @@ class Users {
     }
 
     public function setIdusers($idusers) {
-        $this->idusers = $idusers;
+        $this->idusers = (int)$idusers;
     }
 
     public function setLogin($login) {
-        $this->login = $login;
+        $this->login = htmlspecialchars(strip_tags(trim($login)),ENT_QUOTES);
     }
 
     public function setPwd($pwd) {
-        $this->pwd = $pwd;
+        $this->pwd = htmlspecialchars(trim($pwd),ENT_QUOTES);
     }
 
     public function setDroits_iddroits($droits_iddroits) {
-        $this->droits_iddroits = $droits_iddroits;
+        $this->droits_iddroits = (int)$droits_iddroits;
     }
 
 }

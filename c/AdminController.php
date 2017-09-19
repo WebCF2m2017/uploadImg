@@ -5,6 +5,7 @@
  * Date: 18/09/2017
  * Time: 15:39
  */
+
 // chargement des dépendances
 require_once 'm/UploadImg.php';
 require_once 'm/Images.php';
@@ -52,17 +53,17 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
 
     //var_dump($_POST, $_FILES['limage'],$objImg,$upImh);
 } elseif (isset($_GET['upload'])) {
-    echo $twig->render("formImg.html.twig", ["menu" => $recup_menu]);
+    echo $twig->render("formImg.html.twig", ["menu" => $recup_menu,"connect"=>false]);
 // si on a cliqué sur une section
 } elseif (isset($_GET['idcateg']) && ctype_digit($_GET['idcateg'])) {
     // on récupère les images de la catégorie
     $ToutesImg = $manImages->AfficheParCateg($_GET['idcateg']);
     // info categ
     $infoCateg = $manCateg->afficheUne($_GET['idcateg']);
-    echo $twig->render("categ.html.twig", ["infos" => $infoCateg, "imgt" => $ToutesImg, "menu" => $recup_menu]);
+    echo $twig->render("categ.html.twig", ["infos" => $infoCateg, "imgt" => $ToutesImg, "menu" => $recup_menu,"connect"=>false]);
 } else {
     // var_dump(ImagesManager::AfficheDossier("./m/"));
     $ToutesImg = $manImages->AfficheTous();
     //var_dump($ToutesImg);
-    echo $twig->render("accueil.html.twig", ["imgt" => $ToutesImg, "menu" => $recup_menu]);
+    echo $twig->render("accueil.html.twig", ["imgt" => $ToutesImg, "menu" => $recup_menu,"connect"=>false]);
 }

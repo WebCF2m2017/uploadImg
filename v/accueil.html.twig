@@ -9,10 +9,17 @@
                     {% for m in menu %}
                         <li><a href='?idcateg={{m.idcateg}}'>{{m.intitule}}</a></li>
                     {% endfor %}
-                    <li>{% include 'formConnect.html.twig' %}</li>
+                    {% if(connect) %}
+                    <li>{% include 'formConnect.html.twig' %}
+                    </li>
+                    <li>{{_get.errorConnect}}</li>
+                    {% else %}
+                        <li><a href="?deco">Déconnexion</a></li>
+                    {% endif %}
                 </ul>
             {% endblock %}
             {% block content %}
+
                 <hr/>
                 {% for obj in imgt %}
                     <a title='{{obj.titre}}' href='v/upload/resize/{{obj.nom}}' class='nosPhotos'><img src='v/upload/thumbs/{{obj.nom}}' alt='{{obj.nom}}' /></a>

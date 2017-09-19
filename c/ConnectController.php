@@ -37,8 +37,12 @@ if (isset($_POST['login']) && isset($_POST['pwd'])) {
     $manageUtil = new UsersManager($connect);
     $recupUtil = $manageUtil->ConnectUser($util);
     if($recupUtil){
+        // create session with object Users from db
         $_SESSION = $recupUtil;
         $_SESSION['maclef']= session_id();
-        var_dump($_SESSION);
+        // var_dump($_SESSION);
+        header("Location: ./");
+    }else{
+        header("Location: ./?errorConnect=Login ou mot de passe incorrect");
     }
 }

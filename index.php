@@ -27,7 +27,7 @@ $loader = new Twig_Loader_Filesystem('v');
 $twig = new Twig_Environment($loader/*, array(
     'cache' => 'cache',
 )*/);
-
+$twig->addGlobal('_get', $_GET);
 // récupération du contrôleur
 
 // connection or disconnect

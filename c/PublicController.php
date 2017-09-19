@@ -17,10 +17,10 @@ if(isset($_GET['idcateg'])&& ctype_digit($_GET['idcateg'])) {
     $ToutesImg = $manImages->AfficheParCateg($_GET['idcateg']);
     // info categ
     $infoCateg = $manCateg->afficheUne($_GET['idcateg']);
-    echo $twig->render("categ.html.twig",["infos"=>$infoCateg,"imgt"=>$ToutesImg,"menu"=>$recup_menu]);
+    echo $twig->render("categ.html.twig",["infos"=>$infoCateg,"imgt"=>$ToutesImg,"menu"=>$recup_menu,"connect"=>true]);
 } else {
     // var_dump(ImagesManager::AfficheDossier("./m/"));
     $ToutesImg = $manImages->AfficheTous();
     //var_dump($ToutesImg);
-    echo $twig->render("accueil.html.twig",["imgt"=>$ToutesImg,"menu"=>$recup_menu]);
+    echo $twig->render("accueil.html.twig",["imgt"=>$ToutesImg,"menu"=>$recup_menu,"connect"=>true]);
 }
